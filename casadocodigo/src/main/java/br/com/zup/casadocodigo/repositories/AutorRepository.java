@@ -6,5 +6,7 @@ import br.com.zup.casadocodigo.entities.Autor;
 
 @Repository
 public interface AutorRepository extends JpaRepository<Autor, Long> {
+	
+	Boolean existsByEmail(String email);
 
 }
