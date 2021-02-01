@@ -2,9 +2,9 @@ package br.com.zup.casadocodigo.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import br.com.zup.casadocodigo.entities.Categoria;
+import br.com.zup.casadocodigo.entities.Pais;
 
 @Repository
-public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
+public interface PaisRepository extends JpaRepository<Pais, Long> {
 
 }

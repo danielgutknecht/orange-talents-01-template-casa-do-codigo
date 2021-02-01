@@ -8,7 +8,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import br.com.zup.casadocodigo.endpoint.controller.request.LivroRequest;
 
 @Entity
 public class Livro {
@@ -23,21 +26,28 @@ public class Livro {
 	private Integer numeroPaginas;
 	private String isbn;
 	private LocalDate dataPublicacao;
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+
+	@ManyToOne
 	private Autor autor;
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	private Categoria categoria;
 
-	public Livro(String titulo, String resumo, String sumario, BigDecimal preco, Integer numeroPaginas, String isbn,
-			LocalDate dataPublicacao, Autor autor) {
-		this.titulo = titulo;
-		this.resumo = resumo;
-		this.sumario = sumario;
-		this.preco = preco;
-		this.numeroPaginas = numeroPaginas;
-		this.isbn = isbn;
-		this.dataPublicacao = dataPublicacao;
+	public Livro() {
+
+	}
+
+	public Livro(LivroRequest request, Autor autor, Categoria categoria) {
+
+		this.titulo = request.getTitulo();
+		this.resumo = request.getResumo();
+		this.sumario = request.getSumario();
+		this.preco = request.getPreco();
+		this.numeroPaginas = request.getNumeroPaginas();
+		this.isbn = request.getIsbn();
+		this.dataPublicacao = request.getDataPublicacao();
 		this.autor = autor;
+		this.categoria = categoria;
+
 	}
 
 	public Long getId() {

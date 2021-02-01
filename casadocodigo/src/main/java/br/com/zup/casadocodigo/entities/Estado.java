@@ -1,6 +1,5 @@
 package br.com.zup.casadocodigo.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -8,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import br.com.zup.casadocodigo.endpoint.controller.request.EstadoRequest;
 
 @Entity
 public class Estado {
@@ -17,29 +18,36 @@ public class Estado {
 	private Long id;
 	private String nome;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cidade_id", nullable = false)
-	private Cidade cidade;
+	@JoinColumn(name = "pais_id", nullable = false)
+	private Pais pais;
 
-	public Estado(Long id, String nome) {
-		super();
-		this.id = id;
+	public Estado() {
+
+	}
+
+	public Estado(String nome) {
 		this.nome = nome;
+	}
+
+	public Estado(EstadoRequest request, Pais pais) {
+		this.nome = request.getNome();
+		this.pais = pais;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public Pais getPais() {
+		return pais;
 	}
+	
+	public boolean pertenceAoPais(Pais pais) {
+        return this.pais.equals(pais);
+    }
 
 }

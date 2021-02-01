@@ -11,13 +11,33 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Cidade {
+public class Pais {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	@OneToMany(mappedBy = "cidade", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "pais", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Estado> estado = new HashSet<Estado>();
+
+	public Pais() {
+
+	}
+
+	public Pais(String nome) {
+		this.nome = nome;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public Set<Estado> getEstado() {
+		return estado;
+	}
 
 }

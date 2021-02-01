@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,13 +18,16 @@ public class Autor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	// @Column(unique = true, nullable = false)
 	private String email;
 	private String descricao;
 	private LocalDate criadoEm = LocalDate.now();
 
 	@OneToMany(mappedBy = "autor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Livro> livro = new HashSet<Livro>();
+
+	public Autor() {
+
+	}
 
 	public Autor(String nome, String email, String descricao) {
 		this.nome = nome;
@@ -35,10 +37,6 @@ public class Autor {
 
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getNome() {

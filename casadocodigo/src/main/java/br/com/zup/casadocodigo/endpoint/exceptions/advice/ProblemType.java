@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.endpoint.advice;
+package br.com.zup.casadocodigo.endpoint.exceptions.advice;
 
 public enum ProblemType {
 

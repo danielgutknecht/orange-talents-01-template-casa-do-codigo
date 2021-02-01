@@ -6,11 +6,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-@Component
+
 public class UniqueValidator implements ConstraintValidator<Unique, Object>{
 	
 	private String fieldName;

@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.endpoint.v1.dto.request;
+package br.com.zup.casadocodigo.endpoint.controller.request;
 
 import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;

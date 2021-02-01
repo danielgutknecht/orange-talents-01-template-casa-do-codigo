@@ -1,36 +1,40 @@
 package br.com.zup.casadocodigo.endpoint.controller;
 
-import javax.validation.Valid;
+import java.util.List;
 
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import br.com.zup.casadocodigo.endpoint.v1.dto.request.LivroRequest;
-import br.com.zup.casadocodigo.endpoint.v1.dto.response.LivroResponse;
-import br.com.zup.casadocodigo.entities.Livro;
-import br.com.zup.casadocodigo.repositories.LivroRepository;
+import br.com.zup.casadocodigo.endpoint.controller.request.LivroRequest;
+import br.com.zup.casadocodigo.endpoint.controller.response.LivroResponse;
+import br.com.zup.casadocodigo.services.LivroService;
 
 @RestController
 @RequestMapping("/api/livros")
 public class LivroController {
-	
+
 	@Autowired
-	LivroRepository livroRepository;
-	
+	LivroService livroService;
+
 	@PostMapping
-	public ResponseEntity<LivroResponse> createLivro(@RequestBody @Valid LivroRequest livroRequest){
-		
-		Livro livro = livroRequest.toDamain(livroRequest);
-		
-		livroRepository.save(livro);
-		
-		return ResponseEntity.ok().body(new LivroResponse().toModel(livro));
-		
-		
+	public ResponseEntity<LivroResponse> createLivro(@RequestBody @Valid LivroRequest livroRequest) {
+		return ResponseEntity.ok(livroService.criarLivro(livroRequest));
+	}
+	
+	@GetMapping(path = "/{id}")
+	public ResponseEntity<LivroResponse> findById(@PathVariable  Long id){
+		return ResponseEntity.ok(livroService.buscaPorId(id));
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<LivroResponse>> listarTodosLivros(){
+		return ResponseEntity.ok(livroService.listarTodosLivros());
 	}
 
 }
